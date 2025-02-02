@@ -6,6 +6,12 @@ import 'reuseable_card.dart';
 const blockColor = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
 const inactive = Color(0xFF111328);
+enum Gender{
+  male,
+  female,
+  nulle
+}
+
 
 class BMIBody extends StatefulWidget {
   const BMIBody({super.key});
@@ -15,27 +21,28 @@ class BMIBody extends StatefulWidget {
 }
 
 class _BMIBodyState extends State<BMIBody> {
-  Color maleCardColor = inactive;
-  Color femaleCardColor = inactive;
+   Gender selectedGender=Gender.nulle;
+  // Color maleCardColor = inactive;
+  // Color femaleCardColor = inactive;
+  //
+  // void updateColor(Gender gender) {
+  //   if(gender==Gender.male){
+  //     if(maleCardColor==inactive){
+  //       maleCardColor=blockColor;
+  //       femaleCardColor=inactive;
+  //     }else{
+  //       maleCardColor=inactive;
+  //
+  //     }
+  //   }else {
+  //     if(femaleCardColor==inactive){
+  //      femaleCardColor=blockColor;
+  //      maleCardColor=inactive;
+  //     }else{
+  //       femaleCardColor=inactive;
+  //     }
+  //   }
 
-  void updateColor(int gender) {
-    if(gender==1){
-      if(maleCardColor==inactive){
-        maleCardColor=blockColor;
-        femaleCardColor=inactive;
-      }else{
-        maleCardColor=inactive;
-
-      }
-    }else {
-      if(femaleCardColor==inactive){
-       femaleCardColor=blockColor;
-       maleCardColor=inactive;
-      }else{
-        femaleCardColor=inactive;
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +61,11 @@ class _BMIBodyState extends State<BMIBody> {
                   child: GestureDetector(
                     onTap: (){
                      setState(() {
-                       updateColor(1);
+                       selectedGender=Gender.male;
                      });
                     },
                     child: ReusableCard(
-                      colour: maleCardColor,
+                      colour: selectedGender==Gender.male?blockColor:inactive,
                       cardChild: IconContent(
                           iconCard: FontAwesomeIcons.mars, label: 'MALE'),
                     ),
@@ -69,11 +76,11 @@ class _BMIBodyState extends State<BMIBody> {
                   child: GestureDetector(
                     onTap: (){
                       setState(() {
-                        updateColor(2);
+                       selectedGender=Gender.female;
                       });
                     },
                     child: ReusableCard(
-                      colour: femaleCardColor,
+                      colour: selectedGender==Gender.female?blockColor:inactive,
                       cardChild: IconContent(
                         iconCard: FontAwesomeIcons.venus,
                         label: 'FEMALE',
