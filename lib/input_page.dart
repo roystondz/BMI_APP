@@ -7,12 +7,8 @@ import 'reuseable_card.dart';
 const blockColor = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
 const inactive = Color(0xFF111328);
-enum Gender{
-  male,
-  female,
-  nulle
-}
 
+enum Gender { male, female, nulle }
 
 class BMIBody extends StatefulWidget {
   const BMIBody({super.key});
@@ -22,7 +18,7 @@ class BMIBody extends StatefulWidget {
 }
 
 class _BMIBodyState extends State<BMIBody> {
-   Gender selectedGender=Gender.nulle;
+  Gender selectedGender = Gender.nulle;
   // Color maleCardColor = inactive;
   // Color femaleCardColor = inactive;
   //
@@ -43,7 +39,9 @@ class _BMIBodyState extends State<BMIBody> {
   //       femaleCardColor=inactive;
   //     }
   //   }
-  int height=180;
+  int height = 180;
+  int weight = 60;
+  int age = 25;
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +58,14 @@ class _BMIBodyState extends State<BMIBody> {
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
-                    onTap: (){
-                     setState(() {
-                       selectedGender=Gender.male;
-                     });
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
                     },
                     child: ReusableCard(
-                      colour: selectedGender==Gender.male?blockColor:inactive,
+                      colour:
+                          selectedGender == Gender.male ? blockColor : inactive,
                       cardChild: IconContent(
                           iconCard: FontAwesomeIcons.mars, label: 'MALE'),
                     ),
@@ -75,13 +74,15 @@ class _BMIBodyState extends State<BMIBody> {
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
-                       selectedGender=Gender.female;
+                        selectedGender = Gender.female;
                       });
                     },
                     child: ReusableCard(
-                      colour: selectedGender==Gender.female?blockColor:inactive,
+                      colour: selectedGender == Gender.female
+                          ? blockColor
+                          : inactive,
                       cardChild: IconContent(
                         iconCard: FontAwesomeIcons.venus,
                         label: 'FEMALE',
@@ -94,42 +95,167 @@ class _BMIBodyState extends State<BMIBody> {
             Expanded(
                 child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: blockColor,cardChild:
-                  Column(
+                Expanded(
+                    child: ReusableCard(
+                  colour: blockColor,
+                  cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('HEIGHT',style:
-                        textStyle,),
+                      Text(
+                        'HEIGHT',
+                        style: textStyle,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(height.toString(),
-                          style:
-                            TextStyle(
+                          Text(
+                            height.toString(),
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
-                                  fontSize: 50.0,
-                            ),),
-                          Text('cm',style:
-                            textStyle,)
+                              fontSize: 50.0,
+                            ),
+                          ),
+                          Text(
+                            'cm',
+                            style: textStyle,
+                          )
                         ],
                       ),
-                      Slider(value: height.toDouble() ,min: 120,max:220 ,onChanged: (double newValue){
-                        setState(() {
-                          height=newValue.round();
-                        });
-
-                      },
-                      inactiveColor: inactive,
-                      activeColor: bottomContainerColor,)
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          thumbColor: Color(0xFFEB1555),
+                          activeTrackColor: Colors.white,
+                          overlayColor: Color(0x15EB1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 13.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 20.0),
+                        ),
+                        child: Slider(
+                          value: height.toDouble(),
+                          min: 120,
+                          max: 220,
+                          onChanged: (double newValue) {
+                            setState(() {
+                              height = newValue.round();
+                            });
+                          },
+                          inactiveColor: inactive,
+                        ),
+                      )
                     ],
-                  ),))
+                  ),
+                ))
               ],
             )),
             Expanded(
               child: Row(
                 children: <Widget>[
-                  Expanded(flex: 1, child: ReusableCard(colour: blockColor)),
-                  Expanded(flex: 1, child: ReusableCard(colour: blockColor)),
+                  Expanded(
+                      flex: 1,
+                      child: ReusableCard(
+                        colour: blockColor,
+                        cardChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'WEIGHT',
+                              style: textStyle,
+                            ),
+                            Text(
+                              weight.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 50.0,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FloatingActionButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      weight--;
+                                    });
+                                  },
+                                  backgroundColor: Colors.grey,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15.0,
+                                ),
+                                FloatingActionButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      weight++;
+                                    });
+                                  },
+                                  backgroundColor: Colors.grey,
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                  Expanded(
+                      flex: 1,
+                      child: ReusableCard(
+                          colour: blockColor,
+                          cardChild: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'AGE',
+                                style: textStyle,
+                              ),
+                              Text(
+                                age.toString(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 50.0,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  FloatingActionButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        age--;
+                                      });
+                                    },
+                                    backgroundColor: Colors.grey,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 15.0,
+                                  ),
+                                  FloatingActionButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        age++;
+                                      });
+                                    },
+                                    backgroundColor: Colors.grey,
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ))),
                 ],
               ),
             ),
@@ -143,4 +269,3 @@ class _BMIBodyState extends State<BMIBody> {
         ));
   }
 }
-
