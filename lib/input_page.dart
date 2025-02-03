@@ -172,33 +172,39 @@ class _BMIBodyState extends State<BMIBody> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                FloatingActionButton(
+                                // FloatingActionButton(
+                                //   onPressed: () {
+                                //     setState(() {
+                                //       weight--;
+                                //     });
+                                //   },
+                                //   shape: CircleBorder(),
+                                //   backgroundColor: Colors.grey,
+                                //   child: Icon(
+                                //     Icons.add,
+                                //     color: Colors.white,
+                                //   ),
+                                // ),
+                                RoundButton(
+                                  icon: FontAwesomeIcons.minus,
                                   onPressed: () {
                                     setState(() {
                                       weight--;
                                     });
                                   },
-                                  backgroundColor: Colors.grey,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  ),
                                 ),
                                 SizedBox(
                                   width: 15.0,
                                 ),
-                                FloatingActionButton(
+                                //
+                                RoundButton(
+                                  icon: FontAwesomeIcons.add,
                                   onPressed: () {
                                     setState(() {
                                       weight++;
                                     });
                                   },
-                                  backgroundColor: Colors.grey,
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                  ),
-                                )
+                                ),
                               ],
                             )
                           ],
@@ -225,32 +231,51 @@ class _BMIBodyState extends State<BMIBody> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  FloatingActionButton(
+                                  // FloatingActionButton(
+                                  //   onPressed: () {
+                                  //     setState(() {
+                                  //       age--;
+                                  //     });
+                                  //   },
+                                  //   shape: CircleBorder(),
+                                  //   backgroundColor: Colors.grey,
+                                  //   child: Icon(
+                                  //     Icons.add,
+                                  //     color: Colors.white,
+                                  //   ),
+                                  // ),
+                                  RoundButton(
+                                    icon: FontAwesomeIcons.minus,
                                     onPressed: () {
                                       setState(() {
                                         age--;
                                       });
                                     },
-                                    backgroundColor: Colors.grey,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
                                   ),
                                   SizedBox(
                                     width: 15.0,
                                   ),
-                                  FloatingActionButton(
+                                  // FloatingActionButton(
+                                  //   onPressed: () {
+                                  //     setState(() {
+                                  //       age++;
+                                  //     });
+                                  //   },
+                                  //   shape: CircleBorder(),
+                                  //   backgroundColor: Colors.grey,
+                                  //   child: Icon(
+                                  //     FontAwesomeIcons.plus,
+                                  //     color: Colors.white,
+                                  //   ),
+                                  // ),
+
+                                  RoundButton(
+                                    icon: FontAwesomeIcons.add,
                                     onPressed: () {
                                       setState(() {
                                         age++;
                                       });
                                     },
-                                    backgroundColor: Colors.grey,
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
                                   )
                                 ],
                               )
@@ -267,5 +292,22 @@ class _BMIBodyState extends State<BMIBody> {
             )
           ],
         ));
+  }
+}
+
+class RoundButton extends StatelessWidget {
+  RoundButton({required this.icon, required this.onPressed});
+  final VoidCallback onPressed;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: onPressed,
+      child: Icon(icon),
+      constraints: BoxConstraints(minHeight: 56.0, minWidth: 56.0),
+      shape: CircleBorder(),
+      fillColor: Colors.grey,
+    );
   }
 }
