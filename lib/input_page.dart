@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
@@ -42,7 +43,7 @@ class _BMIBodyState extends State<BMIBody> {
   //       femaleCardColor=inactive;
   //     }
   //   }
-
+  int height=180;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,35 @@ class _BMIBodyState extends State<BMIBody> {
             Expanded(
                 child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: blockColor))
+                Expanded(child: ReusableCard(colour: blockColor,cardChild:
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('HEIGHT',style:
+                        textStyle,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(height.toString(),
+                          style:
+                            TextStyle(
+                              fontWeight: FontWeight.bold,
+                                  fontSize: 50.0,
+                            ),),
+                          Text('cm',style:
+                            textStyle,)
+                        ],
+                      ),
+                      Slider(value: height.toDouble() ,min: 120,max:220 ,onChanged: (double newValue){
+                        setState(() {
+                          height=newValue.round();
+                        });
+
+                      },
+                      inactiveColor: inactive,
+                      activeColor: bottomContainerColor,)
+                    ],
+                  ),))
               ],
             )),
             Expanded(
