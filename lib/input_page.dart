@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reuseable_card.dart';
 import 'result_page.dart';
+import 'brain.dart';
 
 const blockColor = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
@@ -287,7 +288,12 @@ class _BMIBodyState extends State<BMIBody> {
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultPage()));
+                Brain br = Brain(height: height, weight: weight);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultPage(
+                  bmi: br.calculateBMI(),
+                  result: br.getResult(),
+                  interpretation: br.getInterpretation(),
+                )));
               },
               child: Container(
 

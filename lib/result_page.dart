@@ -5,7 +5,12 @@ const bottomContainerColor = Color(0xFFEB1555);
 const blockColor = Color(0xFF1D1E33);
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({super.key});
+
+  ResultPage({@required this.bmi, @required this.result, @required this.interpretation});
+
+  final String? bmi;
+  final String? result;
+  final String? interpretation;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,7 @@ class ResultPage extends StatelessWidget {
                 children: <Widget>[
                   Center(
                     child: Text(
-                      'Normal',
+                      result!,
                       style: TextStyle(
                         fontSize: 22.0,
                         fontWeight: FontWeight.bold,
@@ -49,7 +54,7 @@ class ResultPage extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      '18.5',
+                      bmi!,
                       style: TextStyle(
                         fontSize: 100.0,
                         fontWeight: FontWeight.bold,
@@ -60,7 +65,7 @@ class ResultPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
-                        'You have a normal body weight. Good job!',
+                        interpretation!,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 22.0,
