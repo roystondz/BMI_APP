@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reuseable_card.dart';
+import 'result_page.dart';
 
 const blockColor = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
@@ -284,11 +285,22 @@ class _BMIBodyState extends State<BMIBody> {
                 ],
               ),
             ),
-            Container(
-              color: bottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: 80.0,
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultPage()));
+              },
+              child: Container(
+
+                color: bottomContainerColor,
+                margin: EdgeInsets.only(top: 10.0),
+                width: double.infinity,
+                height: 80.0,
+                child: Center(
+                    child: Text(
+                      'CALCULATE BMI',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26.0),
+                    )),
+              ),
             )
           ],
         ));
@@ -304,10 +316,11 @@ class RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: onPressed,
-      child: Icon(icon),
+
       constraints: BoxConstraints(minHeight: 56.0, minWidth: 56.0),
       shape: CircleBorder(),
       fillColor: Colors.grey,
+      child: Icon(icon),
     );
   }
 }
